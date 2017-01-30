@@ -2,9 +2,10 @@ module Rfvg
 
   class FilterCell
 
-    attr_reader :center_frequency
+    attr_reader :index, :center_frequency
 
-    def initialize(cf)
+    def initialize(idx, cf)
+      @index = idx
       @center_frequency = cf
     end
 
