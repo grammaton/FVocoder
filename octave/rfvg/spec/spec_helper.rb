@@ -9,3 +9,5 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+RSPEC_FLOAT_EPS = 1.0e-6
