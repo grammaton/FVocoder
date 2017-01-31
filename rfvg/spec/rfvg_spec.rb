@@ -5,7 +5,8 @@ RSpec.describe Rfvg do
     expect(Rfvg::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
+  xit 'does something useful' do
+    pending 'not yet implemented'
     #
     # not yet...
     #
