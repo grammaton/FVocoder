@@ -1,5 +1,7 @@
 # FVocoder
 
+[![Join the chat at https://gitter.im/FVocoder/Lobby](https://badges.gitter.im/FVocoder/Lobby.svg)](https://gitter.im/FVocoder/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Freiburg Vocoder simulation
 
 ## Description
