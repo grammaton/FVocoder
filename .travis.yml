@@ -2,7 +2,7 @@ sudo: false
 language: ruby
 env:
   - TEST_DIR=rfvg
-script: cd $TEST_DIR && bundle exec rake # run the default task
+script: cd $TEST_DIR && bundle install && bundle exec rake # run the default task
 rvm:
   - "2.1"
   - "2.2"
