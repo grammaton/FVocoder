@@ -1,6 +1,18 @@
 sudo: false
 language: ruby
+script: cd rfvg && bundle exec rake # run the default task
 rvm:
-  - 2.3.0
-before_install: cd rfvg && gem install bundler -v 1.14.3
-before_script: cd rfvg
+  - "2.1"
+  - "2.2"
+  - "2.3"
+  - "ruby-head"
+before_install: 
+  - cd rfvg && gem install bundler -v 1.14.3
+  - cd rfvg && bundle install
+os:
+  - linux
+  - osx
+matrix:
+  allow_failures:
+    - os: osx
+    - rvm: ruby-head
