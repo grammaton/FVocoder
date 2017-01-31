@@ -5,6 +5,7 @@ module Rfvg
 end
 
 %w{
+  constants
   filter_cell
   filter_bank
 }.each { |f| require File.join(Rfvg::PATH, f) }

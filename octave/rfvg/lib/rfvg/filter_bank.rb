@@ -10,14 +10,10 @@ module Rfvg
 
   private
 
-    FREQUENCY_START = 65.4
-    INTERVAL = 1.0/6.0
-    NUM_FILTERS = 48
-
     def create_bank
-      cur_f = FREQUENCY_START
+      cur_f = Rfvg::FREQUENCY_START
       @cells = []
-      1.upto(NUM_FILTERS) do
+      1.upto(Rfvg::NUMBER_OF_CHANNELS) do
         |n|
         @cells << Rfvg::FilterCell.new(n, cur_f)
         cur_f = next_frequency(cur_f)
@@ -25,7 +21,7 @@ module Rfvg
     end
 
     def next_frequency(prev)
-      prev*(2.0**(INTERVAL))
+      prev*(2.0**(Rfvg::INTERVAL))
     end
 
   end
