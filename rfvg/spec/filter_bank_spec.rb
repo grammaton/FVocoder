@@ -16,16 +16,18 @@ RSpec.describe 'Rfvg::FilterBank' do
     expect(fb.cells.size).to eq 48
   end
 
-  it 'matches its final frequency' do
+  it 'matches its final frequency (including the normalized one)' do
     expect((fb = Rfvg::FilterBank.new)).to be_an_instance_of Rfvg::FilterBank
-    expect(fb.cells[-1].center_frequency).to be_within(RSPEC_FLOAT_EPS).of @frequencies[-1]
+    expect(fb.cells[-1].center_frequency).to be_within(RSPEC_FLOAT_EPS).of @frequencies[-1][0]
+    expect(fb.cells[-1].normalized_center_frequency).to be_within(RSPEC_FLOAT_EPS).of @frequencies[-1][1]
   end
 
-  it 'matches all frequencies' do
+  it 'matches all frequencies (including normalized ones)' do
     expect((fb = Rfvg::FilterBank.new)).to be_an_instance_of Rfvg::FilterBank
     0.upto(fb.cells.size-1) do
       |n|
-      expect(fb.cells[n].center_frequency).to be_within(RSPEC_FLOAT_EPS).of @frequencies[n]
+      expect(fb.cells[n].center_frequency).to be_within(RSPEC_FLOAT_EPS).of @frequencies[n][0]
+      expect(fb.cells[n].normalized_center_frequency).to be_within(RSPEC_FLOAT_EPS).of @frequencies[n][1]
     end
   end
 
