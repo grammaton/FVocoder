@@ -8,9 +8,9 @@ rvm:
   - "2.2"
   - "2.3"
   - "ruby-head"
-before_install: 
-  - cd $TEST_DIR && gem install bundler -v 1.14.3
-  - cd $TEST_DIR && bundle install
+# before_install: 
+#   - cd $TEST_DIR && gem install bundler -v 1.14.3
+#   - cd $TEST_DIR && bundle install
 os:
   - linux
   - osx
