@@ -1,6 +1,7 @@
 # FVocoder
 
 [![Join the chat at https://gitter.im/FVocoder/Lobby](https://badges.gitter.im/FVocoder/Lobby.svg)](https://gitter.im/FVocoder/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/nicb/FVocoder.svg?branch=master)](https://travis-ci.org/nicb/FVocoder)
 
 Freiburg Vocoder simulation
 
