@@ -22,4 +22,12 @@ RSpec.describe 'Rfvg constants' do
     expect(Rfvg::INTERVAL).not_to be nil
   end
 
+  it 'has a maximum passband ripple' do
+    expect(Rfvg::MAX_PASSBAND_RIPPLE).not_to be nil
+  end
+
+  it 'has a stopband attenuation value' do
+    expect(Rfvg::STOPBAND_ATTENUATION).not_to be nil
+  end
+
 end
