@@ -2,7 +2,7 @@ module Rfvg
 
   class FilterBank
 
-    attr_reader :cells
+    attr_reader :filters
 
     def initialize
       create_bank
@@ -12,10 +12,10 @@ module Rfvg
 
     def create_bank
       cur_f = Rfvg::FREQUENCY_START
-      @cells = []
+      @filters = []
       1.upto(Rfvg::NUMBER_OF_CHANNELS) do
         |n|
-        @cells << Rfvg::FilterCell.new(n, cur_f)
+        @filters << Rfvg::FilterCell.new(n, cur_f)
         cur_f = next_frequency(cur_f)
       end
     end

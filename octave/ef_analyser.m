@@ -3,6 +3,7 @@
 % @cindex 1 elliptic_filter_analyser
 % 
 % returns the complex transfer function of the filter along the frequency axis
+% (@var{h}) and the array of frequencies (@var{w})
 % (practically, a wrapper around the `ellip` and `ellipord` functions
 %
 % arguments are:
@@ -15,7 +16,7 @@
 %
 % @var{pr}:  passband ripple tolerance (scalar value in dB)
 %
-% @seealso{ellip, ellipord}
+% @seealso{ellip, ellipord, freqz}
 % @end deftypefn
 %
 function [h, w] = ef_analyser(pbf, sbf, sba, pr)
