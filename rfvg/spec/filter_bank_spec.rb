@@ -5,6 +5,7 @@ RSpec.describe 'Rfvg::FilterBank' do
 
   before 'test' do
     @frequencies = load_frequencies
+    @octave_output = load_octave_output
   end
 
   it 'can be created' do
@@ -31,11 +32,23 @@ RSpec.describe 'Rfvg::FilterBank' do
     end
   end
 
+  it 'spits the correct octave output' do
+    expect((fb = Rfvg::FilterBank.new)).to be_an_instance_of Rfvg::FilterBank
+    expect(fb.to_octave).to eq(@octave_output)
+  end
+
 end
 
 FREQUENCY_FILENAME = File.expand_path(File.join('..', 'data', 'frequencies_calculated_by_octave.yml'), __FILE__)
+OCTAVE_OUTPUT_FILENAME = File.expand_path(File.join('..', 'data', 'filter_bank_octave_output.txt'), __FILE__)
 
 def load_frequencies
   f = YAML.load(File.open(FREQUENCY_FILENAME, 'r'))
   f['frequencies']
+end
+
+def load_octave_output
+  res = nil
+  File.open(OCTAVE_OUTPUT_FILENAME, 'r') { |fh| res = fh.read }
+  res
 end

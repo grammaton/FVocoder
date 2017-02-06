@@ -8,6 +8,12 @@ module Rfvg
       create_bank
     end
 
+    def to_octave
+      res = ""
+      self.filters.each { |f| res += f.to_octave }
+      res
+    end
+
   private
 
     def create_bank
