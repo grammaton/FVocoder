@@ -18,50 +18,45 @@ else
   [x, fs] = wavread('audio/ergonomics.wav');
 end
 
-sig_norm_factor = max(abs(x)); % we'll use this as a global rescaling factor
+%
+% envelope follower made with a second-order low-pass filter
+%
+filter_env = filter_envfoll(x);
 
 %
-% envelope follower made with a second order filter
+% envelope follower made with an hilbert matrix transform (unfiltered)
 %
-nu0 = .995;
-
-B0 = [1-nu0];
-A0 = [1 -nu0];
-
-filter_ef = filter(B0, A0, abs(x));
-filter_ef_mag = abs(filter_ef);
-filter_ef_mag = filter_ef_mag/max(filter_ef_mag) * sig_norm_factor;
+hilbert_env = hm_envfoll(x);
 
 %
-% envelope follower made with an hilbert transform
+% envelope follower made with a filterd hilbert matrix transform
 %
-hilbert_ef = x + i*one_column_hilb(x);
-hilbert_ef_mag = abs(hilbert_ef);
-hilbert_ef_mag = hilbert_ef_mag/max(hilbert_ef_mag) * sig_norm_factor;
+fhilbert_env = fhm_envfoll(x);
 
-nu1 = 0.995;
-B1 = [1-nu1];
-A1 = [1 -nu1];
-filter_hilbert_ef = filter(B1, A1, abs(hilbert_ef));
-filter_hilbert_ef_mag = abs(filter_hilbert_ef);
-filter_hilbert_ef_mag = filter_hilbert_ef_mag/max(filter_hilbert_ef_mag) * sig_norm_factor;
+%
+% envelope follower made with a direct hilbert transform
+%
+thilbert_env = ht_envfoll(x, 80, fs);
 
 N = length(x);
 taxis = [0:N-1]/fs;
 
 figure(1);
-plot(taxis, x, taxis, filter_ef_mag, taxis, hilbert_ef_mag, taxis, filter_hilbert_ef_mag);
-legend('original', 'env follower', 'analytic/hilbert', 'filtered analytic/hilbert', 'location', 'southeast');
+plot(taxis, x, taxis, filter_env, taxis, hilbert_env, taxis, fhilbert_env, taxis, thilbert_env);
+legend('original', 'filter', 'hilbert matrix', 'filtered hilbert matrix', 'hilbert transform', 'location', 'southeast');
 
 figure(2)
-subplot(4,1,1)
+subplot(3,2,1)
 plot(taxis, x)
 
-subplot(4,1,2)
-plot(taxis, filter_ef_mag);
+subplot(3,2,2)
+plot(taxis, filter_env);
 
-subplot(4,1,3)
-plot(taxis, hilbert_ef_mag);
+subplot(3,2,3)
+plot(taxis, hilbert_env);
 
-subplot(4,1,4)
-plot(taxis, filter_hilbert_ef_mag);
+subplot(3,2,4)
+plot(taxis, fhilbert_env);
+
+subplot(3,2,5)
+plot(taxis, thilbert_env);
