@@ -12,7 +12,7 @@ module Rfvg
     def to_octave
       idx = self.index
       res = header
-      res += "[h%02d, w%02d] = ef_analyser([%-.4f, %-.4f], [%-.4f, %-.4f], %-+.4f, %-.4f]);\n" % [idx, idx,
+      res += "[h%02d, w%02d] = ef_analyser([%-.10f, %-.10f], [%-.10f, %-.10f], %-+.1f, %-.8f);\n" % [idx, idx,
                                                                                                   passband_frequencies[0].to_n, passband_frequencies[1].to_n,
                                                                                                   stopband_frequencies[0].to_n, stopband_frequencies[1].to_n,
                                                                                                   Rfvg::STOPBAND_ATTENUATION, Rfvg::MAX_PASSBAND_RIPPLE]
@@ -44,7 +44,7 @@ module Rfvg
     #
     def stopband_frequencies
       lo = 0.1 # Hz
-      hi = Rfvg::SAMPLE_RATE / 2.0 - 1.0
+      hi = Rfvg::SAMPLE_RATE.to_f / 2.0 - 1.0
       [lo, hi]
     end
 

@@ -5,15 +5,17 @@
 %
 % heavily modified by Nicola Bernardini
 %
-sinusoid = 0;
+sinusoid = 1;
 
 if sinusoid
   fs = 1024;
   sinc = 1/fs;
   nT = [0:sinc:1-sinc]';
   f = 20;
-  phi = pi/5;
-  x = cos(2*pi*f*nT+phi) .* hanning(length(nT));
+  % phi = pi/5;
+  phi = 0;
+  % x = cos(2*pi*f*nT+phi) .* hanning(length(nT));
+  x = cos(2*pi*f*nT+phi);
 else
   [x, fs] = wavread('audio/ergonomics.wav');
 end
@@ -36,7 +38,7 @@ fhilbert_env = fhm_envfoll(x);
 %
 % envelope follower made with a direct hilbert transform
 %
-thilbert_env = ht_envfoll(x, 80, fs);
+thilbert_env = ht_envfoll(x, f, fs);
 
 N = length(x);
 taxis = [0:N-1]/fs;

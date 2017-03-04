@@ -20,7 +20,7 @@
 % @end deftypefn
 %
 function [h, w] = ef_analyser(pbf, sbf, sba, pr)
-  [filter_order, Ws] = ellipord (pbf, sbf, pr, sba) % we want to read the coefficients
-  [b, a] = ellip (filter_order, passband_ripple, stopband_attenuation, passband_frequencies);
-  [h, w] = freqz (b, a);
+  [filter_order, Ws] = ellipord (pbf, sbf, pr, sba); % we want to read the coefficients
+  [b, a] = ellip (filter_order, pr, sba, pbf);
+  [h, w] = freqz (b, a, 16381);
 end
