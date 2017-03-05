@@ -12,3 +12,8 @@ Freiburg Vocoder simulation
 * matrix between analysis (envelope following) and resynthesis
 * usage of the two filter banks separately (switching on and off selected filters)
 * OSC control for filter switching
+
+## Output snapshots
+
+* Filter bank frequency response
+  ![filter bank frequency response](./doc/filter_bank_frequency_response.png)

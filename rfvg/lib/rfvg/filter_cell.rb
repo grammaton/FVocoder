@@ -12,7 +12,7 @@ module Rfvg
     def to_octave
       idx = self.index
       res = header
-      res += "[h%02d, w%02d] = ef_analyser([%-.10f, %-.10f], [%-.10f, %-.10f], %-+.1f, %-.8f);\n" % [idx, idx,
+      res += "[h%02d, w%02d, b%02d, a%02d] = ef_analyser([%-.10f, %-.10f], [%-.10f, %-.10f], %-+.1f, %-.8f);\n" % [idx, idx, idx, idx,
                                                                                                   passband_frequencies[0].to_n, passband_frequencies[1].to_n,
                                                                                                   stopband_frequencies[0].to_n, stopband_frequencies[1].to_n,
                                                                                                   Rfvg::STOPBAND_ATTENUATION, Rfvg::MAX_PASSBAND_RIPPLE]

@@ -4,7 +4,8 @@
 % 
 % returns the complex transfer function of the filter along the frequency axis
 % (@var{h}) and the array of frequencies (@var{w})
-% (practically, a wrapper around the `ellip` and `ellipord` functions
+% and the two vectors of filter coefficients @var{b} (numerator) and @var{a} (denominator)
+% (practically, a wrapper around the `ellip` and `ellipord` functions)
 %
 % arguments are:
 %
@@ -19,7 +20,7 @@
 % @seealso{ellip, ellipord, freqz}
 % @end deftypefn
 %
-function [h, w] = ef_analyser(pbf, sbf, sba, pr)
+function [h, w, b, a] = ef_analyser(pbf, sbf, sba, pr)
   [filter_order, Ws] = ellipord (pbf, sbf, pr, sba); % we want to read the coefficients
   [b, a] = ellip (filter_order, pr, sba, pbf);
   [h, w] = freqz (b, a, 16381);
