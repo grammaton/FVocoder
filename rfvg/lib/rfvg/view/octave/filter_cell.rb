@@ -4,14 +4,18 @@ module Rfvg
       module FilterCell
 
         def to_octave
-          idx = self.index
           res = header
-          res += "[h%02d, w%02d, b%02d, a%02d] = ef_analyser([%-.10f, %-.10f], [%-.10f, %-.10f], %-+.1f, %-.8f);\n" % [idx, idx, idx, idx,
+          res += yield(self)
+          res += trailer
+          res
+        end
+
+        def analysis(f)
+          n = f.index
+          "[h%02d, w%02d, b%02d, a%02d] = ef_analyser([%-.10f, %-.10f], [%-.10f, %-.10f], %-+.1f, %-.8f);\n" % [n, n, n, n,
                                                                                                       passband_frequencies[0].to_n, passband_frequencies[1].to_n,
                                                                                                       stopband_frequencies[0].to_n, stopband_frequencies[1].to_n,
                                                                                                       Rfvg::STOPBAND_ATTENUATION, Rfvg::MAX_PASSBAND_RIPPLE]
-          res += trailer
-          res
         end
     
       private
@@ -21,7 +25,7 @@ module Rfvg
                                                                                      passband_frequencies[0], self.center_frequency, passband_frequencies[1]]
         end
     
-        def trailer(fh = STDOUT)
+        def trailer
           "%\n"
         end
     

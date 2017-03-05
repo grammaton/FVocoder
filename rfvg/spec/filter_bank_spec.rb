@@ -34,7 +34,7 @@ RSpec.describe 'Rfvg::FilterBank' do
 
   it 'spits the correct octave output' do
     expect((fb = Rfvg::FilterBank.new)).to be_an_instance_of Rfvg::FilterBank
-    expect(fb.to_octave).to eq(@octave_output)
+    expect(fb.to_octave { |f| f.analysis(f) } ).to eq(@octave_output)
   end
 
 end

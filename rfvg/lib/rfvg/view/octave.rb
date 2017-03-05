@@ -8,4 +8,5 @@ end
 
 %w{
   filter_cell
+  filter_bank
 }.each { |f| require File.join(Rfvg::View::Octave::PATH, f) }
