@@ -7,6 +7,7 @@ end
 %w{
   constants
   numeric
+  view
   filter_cell
   filter_bank
 }.each { |f| require File.join(Rfvg::PATH, f) }
