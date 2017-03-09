@@ -43,18 +43,24 @@ module Rfvg
         end
 
         def function_trailer
-          "w = w01; % one or another is the same\nend"
+          common_trailer + 'end'
         end
     
         def test_trailer
-          res = 'semilogx('
-          self.filters.each { |f| res += ("w%02d(2:size(w%02d,1))./pi*%d, 20*log10(abs(h(%02d)(2:size(h(%02d),1)))), \";;\"," % [f.index, f.index, Rfvg::SAMPLE_RATE, f.index, f.index]) }
+          res = common_trailer + 'semilogx('
+          self.filters.each { |f| res += ("w(2:size(w))./pi*%d, 20*log10(abs(h(:,%d)(2:size(h(:,%d),1)))), \";;\"," % [Rfvg::SAMPLE_RATE, f.index, f.index]) }
           res.sub!(/,$/,'')
           res += ");\n"
           res += ("axis([5 %d -110 3]);" % [Rfvg::SAMPLE_RATE/2.0])
           res += "xlabel(\"Frequency\");\n"
           res += "ylabel(\"abs(H[w])[dB]\");\n"
           res
+        end
+
+      private
+
+        def common_trailer
+          "w = w01; % one or another is the same\n"
         end
 
       end
