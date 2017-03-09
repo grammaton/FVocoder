@@ -56,3 +56,4 @@ build-iPhoneSimulator/
 #
 /octave/fb.m
 /octave/filter_bank.m
+/octave/test/filter_bank_analyser_test.m
