@@ -52,6 +52,7 @@ build-iPhoneSimulator/
 #
 # added by nicb
 #
-# generated automatically by rake rfvg:filterbank.octave
+# generated automatically by rake rfvg:filterbank:octave
 #
 /octave/fb.m
+/octave/filter_bank.m

@@ -6,4 +6,5 @@ module Rfvg
   INTERVAL = 1.0/6.0               # Filter frequencies are calculated as $$F_n = F_{n-1} 2^{Rfvg::INTERVAL}$$
   MAX_PASSBAND_RIPPLE =  0.1       # dB
   STOPBAND_ATTENUATION = 100.0     # dB
+  ANALYSIS_WINDOW_SIZE = 16381     # points - should be an odd prime number slightly less than a power of two
 end

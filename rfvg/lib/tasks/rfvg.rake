@@ -6,9 +6,18 @@ namespace :rfvg do
 
   namespace :filterbank do
 
-    desc 'generates the octave code for the 48-filter bank'
-    task :octave do
-      puts Rfvg::FilterBank.new.to_octave
+    namespace :octave do
+
+      desc 'generates the analysis code for the 48-filter bank (octave)'
+      task :analysis do
+        puts Rfvg::FilterBank.new.to_octave(:no_header, :test_trailer) { |f| f.analysis(f) }
+      end
+
+      desc 'generates the filtering code with the 48-filter bank (octave)'
+      task :filtering do
+        puts Rfvg::FilterBank.new.to_octave { |f| f.filtering(f) }
+      end
+
     end
 
   end

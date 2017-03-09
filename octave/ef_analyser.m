@@ -1,5 +1,5 @@
 % -*- texinfo -*-
-% @deftypefn {ef_analyser.m} {[ @var{h}, @var{w} ] =} ef_analyser (@var{pbf}, @var{sbf}, @var{sba}, @var{pr})
+% @deftypefn {ef_analyser.m} {[ @var{h}, @var{w}, @var{b}, @var{a} ] =} ef_analyser (@var{pbf}, @var{sbf}, @var{sba}, @var{pr} [, @var{wsize} ])
 % @cindex 1 elliptic_filter_analyser
 % 
 % returns the complex transfer function of the filter along the frequency axis
@@ -17,11 +17,16 @@
 %
 % @var{pr}:  passband ripple tolerance (scalar value in dB)
 %
+% @var{wsize}: analysis window size (optional, default: 512)
+%
 % @seealso{ellip, ellipord, freqz}
 % @end deftypefn
 %
-function [h, w, b, a] = ef_analyser(pbf, sbf, sba, pr)
+function [h, w, b, a] = ef_analyser(pbf, sbf, sba, pr, wsize)
+  if(nargin < 5)
+    wsize = 512;
+  end
   [filter_order, Ws] = ellipord (pbf, sbf, pr, sba); % we want to read the coefficients
   [b, a] = ellip (filter_order, pr, sba, pbf);
-  [h, w] = freqz (b, a, 16381);
+  [h, w] = freqz (b, a, wsize);
 end

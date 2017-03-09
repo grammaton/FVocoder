@@ -12,10 +12,18 @@ module Rfvg
 
         def analysis(f)
           n = f.index
-          "[h%02d, w%02d, b%02d, a%02d] = ef_analyser([%-.10f, %-.10f], [%-.10f, %-.10f], %-+.1f, %-.8f);\n" % [n, n, n, n,
+          "[h(:,%d), w%02d, b%02d, a%02d] = ef_analyser([%-.10f, %-.10f], [%-.10f, %-.10f], %-+.1f, %-.8f, %d);\n" % [n, n, n, n,
                                                                                                       passband_frequencies[0].to_n, passband_frequencies[1].to_n,
                                                                                                       stopband_frequencies[0].to_n, stopband_frequencies[1].to_n,
-                                                                                                      Rfvg::STOPBAND_ATTENUATION, Rfvg::MAX_PASSBAND_RIPPLE]
+                                                                                                      Rfvg::STOPBAND_ATTENUATION, Rfvg::MAX_PASSBAND_RIPPLE,
+                                                                                                      Rfvg::ANALYSIS_WINDOW_SIZE]
+        end
+
+        def filtering(f)
+          n = f.index
+          res = analysis(f)
+          res += ("sigs(:,%d) = filter(b%02d, a%02d, input_sig);\n" % [n, n, n])
+          res
         end
     
       private
@@ -27,23 +35,6 @@ module Rfvg
     
         def trailer
           "%\n"
-        end
-    
-        def passband_frequencies
-          lo = self.center_frequency * (2.0**(-1.0/12.0)) # Hz
-          hi = self.center_frequency * (2.0**(+1.0/12.0)) # Hz
-          [lo, hi]
-        end
-    
-        #
-        # +stopband_frequencies+: as per +ellip+ documentation, if the stopband
-        # frequencies surround the passband ones this behaves like a passband
-        # filter (which is what we actually want in this case)
-        #
-        def stopband_frequencies
-          lo = 0.1 # Hz
-          hi = Rfvg::SAMPLE_RATE.to_f / 2.0 - 1.0
-          [lo, hi]
         end
 
       end
