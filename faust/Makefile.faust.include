@@ -1,0 +1,46 @@
+# Directory containing Faust .lib and .cpp architecture files:
+# (cannibalized from the faust distribution)
+#
+ck1 := /opt/local/lib/faust/music.lib
+ck2 := /usr/local/lib/faust/music.lib
+ck3 := $(FAUST_LIB_PATH)/faust/music.lib
+LIB := $(if $(wildcard $(ck1)),/opt/local/lib,"")
+LIB := $(if $(wildcard $(ck2)),/usr/local/lib,$(LIB))
+LIB := $(if $(wildcard $(ck3)),$(FAUST_LIB_PATH),$(LIB))
+
+# Directory containing Faust include files:
+ck11 := /opt/local/include/faust/misc.h
+ck12 := /usr/local/include/faust/misc.h
+ck13 := /usr/include/faust/misc.h
+ck14 := $(FAUST_INC_PATH)/faust/misc.h
+FAUSTINC := $(if $(wildcard $(ck11)),/opt/local/include/faust,"")
+FAUSTINC := $(if $(wildcard $(ck12)),/usr/local/include/faust,$(FAUSTINC))
+FAUSTINC := $(if $(wildcard $(ck13)),/usr/include/faust,$(FAUSTINC))
+FAUSTINC := $(if $(wildcard $(ck14)),$(FAUST_INC_PATH),$(FAUSTINC))
+OSC=1
+
+ifeq ($(OSC),1)
+ OSCCTRL := -DOSCCTRL -I$(FAUSTINC)/gui/
+ QTDEFS  := OSCCTRL
+ OSCLIB  := -L$(LIB)/faust/ -lOSCFaust -loscpack
+endif
+
+ifeq ($(HTTPD),1)
+ HTTPDCTRL := -DHTTPCTRL -I$(FAUSTINC)/gui
+ HTTPDDEFS := HTTPCTRL
+ HTTPDLIB  := -L$(LIB)/faust/ -lHTTPDFaust -lmicrohttpd
+endif
+
+MYICCFLAGS := -O3 -xHost -ftz -fno-alias -fp-model fast=2 $(OSCCTRL) $(HTTPDCTRL)
+
+ifeq ($(system), Darwin)
+MYGCCFLAGS := -O3 -march=native -mfpmath=sse -msse -msse2 -msse3 -ffast-math $(OSCCTRL) $(HTTPDCTRL)
+else
+MYGCCFLAGS := -Wfatal-errors -O3 -mfpmath=sse -msse -msse2 -msse3 -ffast-math $(OSCCTRL) $(HTTPDCTRL)
+endif
+FAUST=faust -svg -a jack-gtk.cpp
+ARCH=x86_64-linux-gnu
+CXXFLAGS=$(MYGCCFLAGS) $(INCLUDES)
+INSTALL=install -d
+LIBS=`pkg-config --cflags --libs jack gtk+-2.0` $(OSCLIB) $(HTTPDLIB)
+RM=rm -rf

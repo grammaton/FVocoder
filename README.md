@@ -19,3 +19,5 @@ Freiburg Vocoder simulation
   ![filter bank frequency response](./doc/filter_bank_freq_response.png)
 * Filter bank output with a real signal
   ![filter bank output](./doc/filter_bank_mesh.png)
+* Envelope follower bank output with a real signal
+  ![envelope follower bank output](./doc/envelope_follower_bank_surf.png)

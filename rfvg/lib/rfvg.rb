@@ -10,4 +10,5 @@ end
   view
   filter_cell
   filter_bank
+  envelope_follower_bank
 }.each { |f| require File.join(Rfvg::PATH, f) }
