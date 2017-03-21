@@ -13,7 +13,6 @@ import("filter.lib");
 // around the center frequency
 
 filter_channel(source, mute_button, center_freq) = source : bandpass6e(le, he) <: mute_button,* : ba.toggle * _
-// filter_channel(source, mute_button, center_freq) = source : bandpass6e(le, he) : _
 with {
   le = center_freq * pow(2, -1/12);
 	he = center_freq * pow(2, 1/12);
