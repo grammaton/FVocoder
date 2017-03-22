@@ -66,3 +66,6 @@ build-iPhoneSimulator/
 #
 /faust/**/*.cpp
 /faust/from_the_web/michon_vocoder
+/faust/**/*-mdoc
+/faust/**/*-svg
+/faust/tests/*_test
