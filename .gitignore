@@ -69,3 +69,4 @@ build-iPhoneSimulator/
 /faust/**/*-mdoc
 /faust/**/*-svg
 /faust/tests/*_test
+/faust/exe/*.exe
