@@ -30,6 +30,6 @@ fi = library ("filter.lib");
 
 filter_channel(source, mute_button, center_freq) = source : fi.bandpass6e(le, he) <: mute_button,* : ba.toggle * _
 with {
-  le = center_freq * pow(2, -1/12);
-	he = center_freq * pow(2, 1/12);
+  le = center_freq * pow(2, -1/8);
+	he = center_freq * pow(2, 1/8);
 };

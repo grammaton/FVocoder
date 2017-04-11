@@ -45,5 +45,6 @@ FAUST=faust $(FAUST_FLAGS)
 ARCH=x86_64-linux-gnu
 CXXFLAGS=$(MYGCCFLAGS) $(INCLUDES)
 INSTALL=install -d
-LIBS=`pkg-config --cflags --libs jack gtk+-2.0` $(OSCLIB) $(HTTPDLIB)
+PKG-CONFIG=pkg-config
+LIBS=`$(PKG-CONFIG) --cflags --libs jack gtk+-2.0` $(OSCLIB) $(HTTPDLIB)
 RM=rm -rf
