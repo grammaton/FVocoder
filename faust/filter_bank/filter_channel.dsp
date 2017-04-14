@@ -25,11 +25,13 @@ fi = library ("filter.lib");
 // * `cf`: center frequency
 //
 // We suppose that the filters of the Freiburg Vocoder are 12-th
-// order elliptical filters whose bandpass width is a whole-tone
+// order elliptical filters whose bandpass width is three quarter-tones
+// (a semitone plus a quarter-tone, that is 3/24 or 1/8)
 // around the center frequency
 
 filter_channel(source, mute_button, center_freq) = source : fi.bandpass6e(le, he) <: mute_button,* : ba.toggle * _
 with {
+  // three quarter tones = 3/24 = 1/8 
   le = center_freq * pow(2, -1/8);
 	he = center_freq * pow(2, 1/8);
 };

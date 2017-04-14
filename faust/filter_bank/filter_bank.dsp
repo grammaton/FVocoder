@@ -36,7 +36,8 @@ filter_bank(x, fbn) = x <: par(n, n_filters, one_filter_channel(n, _)) :> _
     {
       f = cf(n);
       i = n >= (n_filters/2);
+			j = n + 1; // so that filters are numbered 1-48 and not 0-47
       b = fbn;
-      mute_button = checkbox("/h:GUI/v:filter_bank_group_%i/mute %02n (%0f) [osc:/filter_bank/%b/%n 0 10]");
+      mute_button = checkbox("/h:GUI/v:filter_bank_group_%i/mute %02j (%0f) [osc:/filter_bank/%b/%j 0 10]");
     };
 };

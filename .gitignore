@@ -69,4 +69,7 @@ build-iPhoneSimulator/
 /faust/**/*-mdoc
 /faust/**/*-svg
 /faust/tests/*_test
-/faust/exe/*.exe
+/faust/tests/*.tmp.dsp
+/faust/exe/*_exe
+/faust/fldir/*.dsp
+/faust/fldir/.link-done
