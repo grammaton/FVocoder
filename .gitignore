@@ -65,11 +65,11 @@ build-iPhoneSimulator/
 # generated automatically by faust
 #
 /faust/**/*.cpp
+/faust/**/*.tmp.dsp
 /faust/from_the_web/michon_vocoder
 /faust/**/*-mdoc
 /faust/**/*-svg
 /faust/tests/*_test
-/faust/tests/*.tmp.dsp
-/faust/exe/*_exe
+/faust/**/*_exe
 /faust/fldir/*.dsp
 /faust/fldir/.link-done
