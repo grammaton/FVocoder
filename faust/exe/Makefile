@@ -13,7 +13,7 @@ all: $(TARGETS)
 $(TARGETS): $(DEPENDS)
 
 clean:
-	$(RM) $(TARGETS) $(TARGETS:=.cpp) $(TARGETS:=-svg) $(TARGETS:=.xml) $(TARGETS:=-graph.pdf) $(TARGETS:=-mdoc) *tmp*
+	$(RM) $(TARGETS) $(TARGETS:=-svg) $(TARGETS:=.xml) $(TARGETS:=-graph.pdf) $(TARGETS:=-mdoc) *tmp* *.cpp
 
 .PHONY: clean
 
