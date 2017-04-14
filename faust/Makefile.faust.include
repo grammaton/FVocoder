@@ -21,7 +21,8 @@ FAUSTINC := $(if $(wildcard $(ck14)),$(FAUST_INC_PATH),$(FAUSTINC))
 OSC=1
 
 ifeq ($(OSC),1)
- OSCCTRL := -DOSCCTRL -I$(FAUSTINC)/gui/
+ FAUSTINC := $(FAUSTINC)/gui/
+ OSCCTRL := -DOSCCTRL -I$(FAUSTINC)
  QTDEFS  := OSCCTRL
  OSCLIB  := -L$(LIB)/faust/ -lOSCFaust -loscpack
 endif

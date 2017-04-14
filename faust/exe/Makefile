@@ -4,7 +4,7 @@ FAUST_IMPORT_DIRS=-I $(FILTER_BANK_DIR)
 
 include $(TOP)/Makefile.faust.include
 
-TARGETS=filter_bank.exe
+TARGETS=filter_bank_exe
 DEPENDS=filter_channel.dsp filter_bank.dsp
 VPATH=.:$(FILTER_BANK_DIR)
 
