@@ -40,8 +40,9 @@ MYGCCFLAGS := -O3 -march=native -mfpmath=sse -msse -msse2 -msse3 -ffast-math $(O
 else
 MYGCCFLAGS := -Wfatal-errors -O3 -mfpmath=sse -msse -msse2 -msse3 -ffast-math $(OSCCTRL) $(HTTPDCTRL)
 endif
-FAUST_ARCH := -a jack-gtk.cpp
-FAUST_FLAGS=-svg $(FAUST_ARCH) -omp -quad -mdoc $(FAUST_IMPORT_DIRS)
+FAUST_TIMEOUT=600
+FAUST_ARCH=-a jack-gtk.cpp
+FAUST_FLAGS=-svg $(FAUST_ARCH) -omp -quad -mdoc -t $(FAUST_TIMEOUT) $(FAUST_IMPORT_DIRS)
 FAUST=faust $(FAUST_FLAGS)
 ARCH=x86_64-linux-gnu
 CXXFLAGS=$(MYGCCFLAGS) $(INCLUDES)

@@ -7,4 +7,4 @@ declare license "GNU GPL";
 
 import ("filter_bank.dsp");
 
-process = vgroup("filter_bank", filter_bank(_) : _);
+process(x) = filter_bank(x, 1, 48) :> _;

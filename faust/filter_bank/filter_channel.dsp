@@ -1,12 +1,11 @@
 declare name "Filter Channel";
 declare author "Nicola Bernardini";
 declare copyright "Nicola Bernardini";
-declare acknowledgements "Julius Smith, Romain Michon";
+declare acknowledgements "Julius Smith, Romain Michon, Yann Orlarey, Stéphane Letz";
 declare version "0.0";
 declare license "GNU GPL";
 
-ba = library ("basics.lib");
-fi = library ("filter.lib");
+import ("stdfaust.lib");
 
 //-------------`filter_channel`-------------
 // Implements a 12-th order elliptical filter along with a mute  switch,
@@ -15,7 +14,7 @@ fi = library ("filter.lib");
 // #### Usage
 //
 // ```faust
-// filter_channel(source, mute_switch, cf) : _ 
+// filter_channel(source, cf) : _ 
 // ```
 //
 // where:
@@ -29,7 +28,7 @@ fi = library ("filter.lib");
 // (a semitone plus a quarter-tone, that is 3/24 or 1/8)
 // around the center frequency
 
-filter_channel(source, mute_button, center_freq) = source : fi.bandpass6e(le, he) <: mute_button,* : ba.toggle * _
+filter_channel(source, center_freq) = source : fi.bandpass6e(le, he)
 with {
   // three quarter tones = 3/24 = 1/8 
   le = center_freq * pow(2, -1/8);
