@@ -1,6 +1,6 @@
 TOP=..
-DIRS=$(TOP)/filter_bank $(TOP)/exe
-LN=ln -f
+DIRS=$(TOP)/filter_bank $(TOP)/exe $(TOP)/switch $(TOP)/tests
+LN=ln -sf
 TOUCH=touch
 TSTAMP=.link-done
 

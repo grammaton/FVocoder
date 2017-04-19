@@ -49,14 +49,14 @@ filter_bank(x, fbn, n_filters) = x <: par(n, n_filters, one_filter_channel(n, _)
 //
 // * `source`: signal source
 // * `fbn`:    filter bank number
+// * `n_filters`: number of filters
 //
 // This creates a 48-filter elliptic filter bank which simulates
 // the analog elliptic filters which were used at the Freiburg Experimentalstudio
 
-switchable_filter_bank(x, fbn) = x <: par(n, n_filters, one_filter_channel(n, _)) :> _
+switchable_filter_bank(x, fbn, n_filters) = x <: par(n, n_filters, one_filter_channel(n, _))
   with {
-    n = 1;
-    n_filters = 48;
+    n = 0;
     cf(0) = 65.4;
     cf(n) = cf(n-1) * pow(2, 1/6);
 		one_filter_channel(n, sig) = filter_channel(sig, cf(n)) : switch_channel(_, mute_button) 
@@ -66,6 +66,6 @@ switchable_filter_bank(x, fbn) = x <: par(n, n_filters, one_filter_channel(n, _)
       i = n >= (n_filters/2);
 			j = n + 1; // so that filters are numbered 1-48 and not 0-47
       b = fbn;
-      mute_button = checkbox("/h:GUI/v:filter_bank_group_%i/mute %02j (%0f) [osc:/filter_bank/%b/%j 0 10]");
+      mute_button = checkbox("/h:GUI/v:filter_bank_group_%i/mute %02j (%0f) [osc:/filter_bank/%b/%j 0 1]");
     };
 };
