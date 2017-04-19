@@ -13,4 +13,4 @@ GUI(x) = hgroup("GUI",
              vgroup("gain", x),
              vgroup("output VU", x));
 
-process = GUI(filter_bank(_,1) : vslider("/h:GUI/v:gain/gain", 1, 0, 10, 1) * _);
+process = GUI(switchable_filter_bank(_,1,48) :> (vslider("/h:GUI/v:gain/gain", 0, -96, +36, 0.1) : ba.db2linear : si.smoo) * _);
