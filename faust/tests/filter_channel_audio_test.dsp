@@ -6,5 +6,6 @@ declare version "0.0";
 declare license "GNU GPL";
 
 import ("filter_channel.dsp");
-
-process = filter_channel(_, button("mute"), 1000) : _;
+f(0) = vslider("freq",1000,65.4,1400,1);
+f(n) = f(n-1) * 1.05;
+process(x) = x <: par(n,1,filter_channel(_, f(n))) :> _;

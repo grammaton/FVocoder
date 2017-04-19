@@ -8,4 +8,4 @@ declare license "GNU GPL";
 import ("filter_bank.dsp");
 import ("switch_channel.dsp");
 
-process(x) = switchable_filter_bank(x, 1, 48) :> _;
+process(x) = switchable_filter_bank(x, 1, 33) :> _;
