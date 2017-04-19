@@ -57,7 +57,7 @@ filter_bank(x, fbn, n_filters) = x <: par(n, n_filters, one_filter_channel(_, n)
 switchable_filter_bank(x, fbn, n_filters) = x <: par(n, n_filters, one_filter_channel(n, _))
   with {
     n = 0;
-    cf(0) = 370;
+    cf(0) = 65.4;
     cf(n) = cf(n-1) * pow(2, 1/6);
 		one_filter_channel(n, x) = filter_channel(x, cf(n)) : switch_channel(_, mute_button) 
     with

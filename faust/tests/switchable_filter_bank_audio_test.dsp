@@ -8,4 +8,4 @@ declare license "GNU GPL";
 import ("filter_bank.dsp");
 import ("switch_channel.dsp");
 
-process(x) = switchable_filter_bank(x, 1, 33) :> _;
+process(x) = ((vslider("gain", -96, -96, +12, 0.1) : ba.db2linear : si.smoo) * x) : switchable_filter_bank(_, 1, 48) :> _;
