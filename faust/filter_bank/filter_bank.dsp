@@ -27,45 +27,10 @@ import("switch_channel.dsp");
 // the analog elliptic filters which were used at the Freiburg Experimentalstudio
 // (should use 48 filters to simulate it completely
 
-filter_bank(x, fbn, n_filters) = x <: par(n, n_filters, one_filter_channel(_, n))
+filter_bank(fbn, n_filters) = par(n, n_filters, filter_channel(_, cf(n)))
   with {
     n = 0;
     cf(0) = 65.4;
     cf(n) = cf(n-1) * pow(2, 1/6);
-		one_filter_channel(x, n) = filter_channel(x, cf(n));
-};
-
-//-------------`switchable_filter_bank`-------------
-// Implements a 48-12-th order elliptical filter bank which allows
-// individual filters to be switched on and off
-//
-// #### Usage
-//
-// ```faust
-// switchable_filter_bank(source, fbn) : _ 
-// ```
-//
-// where:
-//
-// * `source`: signal source
-// * `fbn`:    filter bank number
-// * `n_filters`: number of filters
-//
-// This creates a 48-filter elliptic filter bank which simulates
-// the analog elliptic filters which were used at the Freiburg Experimentalstudio
-
-switchable_filter_bank(x, fbn, n_filters) = x <: par(n, n_filters, one_filter_channel(n, _))
-  with {
-    n = 0;
-    cf(0) = 65.4;
-    cf(n) = cf(n-1) * pow(2, 1/6);
-		one_filter_channel(n, x) = filter_channel(x, cf(n)) : switch_channel(_, mute_button) 
-    with
-    {
-      f = cf(n);
-      i = n >= (n_filters/2);
-			j = n + 1; // so that filters are numbered 1-48 and not 0-47
-      b = fbn;
-      mute_button = checkbox("/h:GUI/v:filter_bank_group_%i/mute %02j (%0f) [osc:/filter_bank/%b/%j 0 1]");
-    };
+		// one_filter_channel(x, n) = filter_channel(x, cf(n));
 };
