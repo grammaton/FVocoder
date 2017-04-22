@@ -6,11 +6,9 @@ declare version "0.0";
 declare license "GNU GPL";
 
 import ("filter_bank.dsp");
+import ("switch_bank.dsp");
 
-GUI(x) = hgroup("GUI",
-             vgroup("filter_bank_group_0", x),
-             vgroup("filter_bank_group_1", x),
-             vgroup("gain", x),
-             vgroup("output VU", x));
+GUI = hgroup("filter bank", vgroup("[1]", _) : vgroup("[2]", _) : vgroup("[3]", _) : vgroup("[4]", _));
 
-process = GUI(switchable_filter_bank(_,1,48) :> (vslider("/h:GUI/v:gain/gain", 0, -96, +36, 0.1) : ba.db2linear : si.smoo) * _);
+n_ch = 48;
+process(x) = x <: GUI(filter_bank(1,n_ch) : switch_bank(_,1,n_ch) :> (vslider("/h:filter_bank/v:[3]/ [osc:/fb/1/gain -96 +36]", 0, -96, +36, 0.1) : ba.db2linear : si.smoo) * _);
