@@ -1,7 +1,7 @@
 TOP=../..
 include $(TOP)/Makefile.faust.include
 
-TARGET=cf
+TARGET=io
 
 all: $(TARGET)
 
@@ -20,7 +20,7 @@ clean:
 .SUFFIXES: .dsp
 
 %.cpp: %.dsp
-	$(FAUST) $(FAUST_ARCH) $(FAUST_FLAGS) -o $@ $<
+	$(FAUST) $(FAUST_FLAGS) -o $@ $<
 
 %: %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $*.cpp $(LIBS)

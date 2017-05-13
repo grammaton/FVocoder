@@ -1,12 +1,9 @@
 TOP=../..
 include $(TOP)/Makefile.faust.include
 
-TARGET=cf
+TARGET=two_groups simple_iteration
 
 all: $(TARGET)
-
-plot: clean
-	$(MAKE) -$(MAKEFLAGS) "FAUST_ARCH=-a plot.cpp"
 
 octave: clean
 	$(MAKE) -$(MAKEFLAGS) "FAUST_ARCH=-a matlabplot.cpp"
